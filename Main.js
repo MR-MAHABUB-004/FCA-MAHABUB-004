@@ -2,11 +2,11 @@
 
 //-[ Require config and use ]-!/
 
-if (global.Fca.Require.Priyansh.Config != 'default') {
+if (global.Fca.Require.Mahabub.Config != 'default') {
     //do ssth
 }
 
-const Language = global.Fca.Require.languageFile.find((/** @type {{ Language: string; }} */i) => i.Language == global.Fca.Require.Priyansh.Language).Folder.Index;
+const Language = global.Fca.Require.languageFile.find((/** @type {{ Language: string; }} */i) => i.Language == global.Fca.Require.Mahabub.Language).Folder.Index;
 
 //-[ Require All Package Need Use ]-!/
 
@@ -462,7 +462,7 @@ function makeLogin(jar, email, password, loginOptions, callback, prCallback) {
                                         dpr: 1
                                     });
                                 }, 2500);  
-                                switch (global.Fca.Require.Priyansh.Login2Fa) {
+                                switch (global.Fca.Require.Mahabub.Login2Fa) {
                                     case true: {
                                         const question = question => {
                                             const rl = readline.createInterface({
@@ -571,7 +571,7 @@ function makeLogin(jar, email, password, loginOptions, callback, prCallback) {
                                             Database().delete('Through2Fa');
                                         }
                                         const Otp_code = require('totp-generator');
-                                        const Code = global.Fca.Require.Priyansh.AuthString.includes('|') == false ? Otp_code(global.Fca.Require.Priyansh.AuthString.includes(" ") ? global.Fca.Require.Priyansh.AuthString.replace(RegExp(" ", 'g'), "") : global.Fca.Require.Priyansh.AuthString) :  question(Language.EnterSecurityCode); 
+                                        const Code = global.Fca.Require.Mahabub.AuthString.includes('|') == false ? Otp_code(global.Fca.Require.Mahabub.AuthString.includes(" ") ? global.Fca.Require.Mahabub.AuthString.replace(RegExp(" ", 'g'), "") : global.Fca.Require.Mahabub.AuthString) :  question(Language.EnterSecurityCode); 
                                             try {
                                                 const approvals = function(N_Code) { 
                                                     form.approvals_code = N_Code;
@@ -853,7 +853,7 @@ try {
                 }
             }
             try {
-                switch (global.Fca.Require.Priyansh.EncryptFeature) {
+                switch (global.Fca.Require.Mahabub.EncryptFeature) {
                     case true: {
                         appState = JSON.parse(JSON.stringify(appState, null, "\t"));
                         switch (utils.getType(appState)) {
@@ -911,7 +911,7 @@ try {
                     }
                         break;
                     default: {
-                        logger.Warning(getText(Language.IsNotABoolean,global.Fca.Require.Priyansh.EncryptFeature))
+                        logger.Warning(getText(Language.IsNotABoolean,global.Fca.Require.Mahabub.EncryptFeature))
                         process.exit(0);
                     }
                 }
@@ -1098,9 +1098,9 @@ function setUserNameAndPassWord() {
                             logger.Error();
                         process.exit(0);
                     }
-                    if (global.Fca.Require.Priyansh.ResetDataLogin) {
-                        global.Fca.Require.Priyansh.ResetDataLogin = false;
-                        global.Fca.Require.fs.writeFileSync(process.cwd() + '/PriyanshFca.json', JSON.stringify(global.Fca.Require.Priyansh, null, 4));
+                    if (global.Fca.Require.Mahabub.ResetDataLogin) {
+                        global.Fca.Require.Mahabub.ResetDataLogin = false;
+                        global.Fca.Require.fs.writeFileSync(process.cwd() + '/MahabubFca.json', JSON.stringify(global.Fca.Require.Priyansh, null, 4));
                     }
                 logger.Success(Language.SuccessSetData);
                 process.exit(1);
@@ -1244,9 +1244,9 @@ function login(loginData, options, callback) {
             }
         }
 **/
-        switch (global.Fca.Require.Priyansh.AutoLogin) {
+        switch (global.Fca.Require.Mahabub.AutoLogin) {
             case true: {
-                if (global.Fca.Require.Priyansh.ResetDataLogin) return setUserNameAndPassWord();
+                if (global.Fca.Require.Mahabub.ResetDataLogin) return setUserNameAndPassWord();
                 else {
                     try {
                         const TempState = Database().get("TempState")
