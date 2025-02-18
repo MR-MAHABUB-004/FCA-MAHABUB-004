@@ -22,7 +22,7 @@ global.Fca = new Object({
         return Main;
     },
     Data: new Object({
-        ObjPriyansh: {
+        ObjMahabub: {
             "Language": "en",
             "PreKey": "",
             "AutoUpdate": true,
@@ -167,7 +167,7 @@ try {
 
 
     if (!global.Fca.Require.fs.existsSync(process.cwd() + '/MahabubFca.json')) {
-        global.Fca.Require.fs.writeFileSync(process.cwd() + "/MahabubFca.json", JSON.stringify(global.Fca.Data.ObjPriyansh, null, "\t"));
+        global.Fca.Require.fs.writeFileSync(process.cwd() + "/MahabubFca.json", JSON.stringify(global.Fca.Data.ObjMahabub, null, "\t"));
         process.exit(1);
     }
 
@@ -175,8 +175,8 @@ try {
     var Data_Setting = require(process.cwd() + "/MahabubFca.json");
 }
 catch (e) {
-    global.Fca.Require.logger.Error('Detect Your PriyanshFca Settings Invalid!, Carry out default restoration');
-    global.Fca.Require.fs.writeFileSync(process.cwd() + "/MahabubFca.json", JSON.stringify(global.Fca.Data.ObjPriyansh, null, "\t"));     
+    global.Fca.Require.logger.Error('Detect Your MahabubFca Settings Invalid!, Carry out default restoration');
+    global.Fca.Require.fs.writeFileSync(process.cwd() + "/MahabubFca.json", JSON.stringify(global.Fca.Data.ObjMahabub, null, "\t"));     
     process.exit(1)
 }
     if (global.Fca.Require.fs.existsSync(process.cwd() + '/MahabubFca.json')) {
@@ -205,25 +205,25 @@ catch (e) {
             else if (Object_Fca.includes(i)) {
                 if (global.Fca.Require.utils.getType(Data_Setting[i]) != "Object") {
                     Data_Setting[i] = global.Fca.Data.ObjMahabub[i];
-                    global.Fca.Require.fs.writeFileSync(process.cwd() + "/PriyanshFca.json", JSON.stringify(Data_Setting, null, "\t"));
+                    global.Fca.Require.fs.writeFileSync(process.cwd() + "/MahabubFca.json", JSON.stringify(Data_Setting, null, "\t"));
                 }
                 else continue;
             }
         }
 
         for (let i of Object_Fca) {
-            const All_Paths = utils.getPaths(global.Fca.Data.ObjPriyansh[i]);
+            const All_Paths = utils.getPaths(global.Fca.Data.ObjMahabub[i]);
             const Mission = { Main_Path: i, Data_Path: All_Paths }
             for (let i of Mission.Data_Path) {
                 if (Data_Setting[Mission.Main_Path] == undefined) {
                     Data_Setting[Mission.Main_Path] = global.Fca.Data.ObjMahabub[Mission.Main_Path];
-                    global.Fca.Require.fs.writeFileSync(process.cwd() + "/PriyanshFca.json", JSON.stringify(Data_Setting, null, "\t"));      
+                    global.Fca.Require.fs.writeFileSync(process.cwd() + "/MahabubFca.json", JSON.stringify(Data_Setting, null, "\t"));      
                 }
                 const User_Data = (utils.getData_Path(Data_Setting[Mission.Main_Path], i, 0))
                 const User_Data_Type = utils.getType(User_Data);
                 if (User_Data_Type == "Number") {
                     const Mission_Path = User_Data == 0 ? i : i.slice(0, User_Data); 
-                    const Mission_Obj = utils.getData_Path(global.Fca.Data.ObjPriyansh[Mission.Main_Path], Mission_Path, 0);
+                    const Mission_Obj = utils.getData_Path(global.Fca.Data.ObjMahabub[Mission.Main_Path], Mission_Path, 0);
                     Data_Setting[Mission.Main_Path] = utils.setData_Path(Data_Setting[Mission.Main_Path], Mission_Path, Mission_Obj)
                     global.Fca.Require.fs.writeFileSync(process.cwd() + "/MahabubFca.json", JSON.stringify(Data_Setting, null, "\t"));      
                 }
