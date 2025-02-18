@@ -192,12 +192,12 @@ function buildAPI(globalOptions, html, jar, bypass_region) {
     var maybeUser = cookie.filter(function(val) { return val.cookieString().split("=")[0] === "c_user"; });
     var maybeTiktik = cookie.filter(function(val) { return val.cookieString().split("=")[0] === "i_user"; });
     if (maybeUser.length === 0 && maybeTiktik.length === 0) {
-        if (global.Fca.Require.Priyansh.AutoLogin) {
+        if (global.Fca.Require.Mahabub.AutoLogin) {
             return global.Fca.Require.logger.Warning(global.Fca.Require.Language.Index.AutoLogin, function() {
                 global.Fca.Action('AutoLogin')
             });
         }
-        else if (!global.Fca.Require.Priyansh.AutoLogin) {
+        else if (!global.Fca.Require.Mahabub.AutoLogin) {
             return global.Fca.Require.logger.Error(global.Fca.Require.Language.Index.ErrAppState);
         }
     }
@@ -376,7 +376,7 @@ function buildAPI(globalOptions, html, jar, bypass_region) {
         var defaultFuncs = utils.makeDefaults(html, userID, ctx);
 
         fs.readdirSync(__dirname + "/src").filter((/** @type {string} */File) => File.endsWith(".js") && !File.includes('Dev_')).map((/** @type {string} */File) => { 
-            if (File == 'getThreadInfo.js' && global.Fca.Require.Priyansh.AntiGetInfo.AntiGetThreadInfo != true || File == 'getUserInfo.js'  && global.Fca.Require.Priyansh.AntiGetInfo.AntiGetUserInfo != true) api[File.split('.').slice(0, -1).join('.')] = require('./src/' + (File.includes('getThreadInfo') ? 'getThreadMain.js' : 'getUserInfoMain.js'))(defaultFuncs, api, ctx)
+            if (File == 'getThreadInfo.js' && global.Fca.Require.Mahabub.AntiGetInfo.AntiGetThreadInfo != true || File == 'getUserInfo.js'  && global.Fca.Require.Mahabub.AntiGetInfo.AntiGetUserInfo != true) api[File.split('.').slice(0, -1).join('.')] = require('./src/' + (File.includes('getThreadInfo') ? 'getThreadMain.js' : 'getUserInfoMain.js'))(defaultFuncs, api, ctx)
             else api[File.split('.').slice(0, -1).join('.')] = require('./src/' + File)(defaultFuncs, api, ctx)
         });
 
@@ -1100,7 +1100,7 @@ function setUserNameAndPassWord() {
                     }
                     if (global.Fca.Require.Mahabub.ResetDataLogin) {
                         global.Fca.Require.Mahabub.ResetDataLogin = false;
-                        global.Fca.Require.fs.writeFileSync(process.cwd() + '/MahabubFca.json', JSON.stringify(global.Fca.Require.Priyansh, null, 4));
+                        global.Fca.Require.fs.writeFileSync(process.cwd() + '/MahabubFca.json', JSON.stringify(global.Fca.Require.Mahabub, null, 4));
                     }
                 logger.Success(Language.SuccessSetData);
                 process.exit(1);
@@ -1200,7 +1200,7 @@ function login(loginData, options, callback) {
                 if (!UserName || !PassWord) {
                     logger.Warning("Dangerous action detected! Proceeding to automatically disable websocket_extension.");
                     global.Fca.Require.FastConfig.Websocket_Extension.Status = false;
-                    global.Fca.Require.fs.writeFileSync(process.cwd() + "/PriyanshFca.json", JSON.stringify(global.Fca.Require.FastConfig, null, "\t"));
+                    global.Fca.Require.fs.writeFileSync(process.cwd() + "/MahabubFca.json", JSON.stringify(global.Fca.Require.FastConfig, null, "\t"));
                 }
                 else {
                     try {
@@ -1213,7 +1213,7 @@ function login(loginData, options, callback) {
                             Database().set('Ws_2Fa', secret.base32); 
                             if (global.Fca.Require.FastConfig.Websocket_Extension.ResetData) {
                                 global.Fca.Require.FastConfig.Websocket_Extension.ResetData = false;
-                                global.Fca.Require.fs.writeFileSync(process.cwd() + '/PriyanshFca.json', JSON.stringify(global.Fca.Require.FastConfig, null, 4));
+                                global.Fca.Require.fs.writeFileSync(process.cwd() + '/MahabubFca.json', JSON.stringify(global.Fca.Require.FastConfig, null, 4));
                             }
                             question("Enter To Continue!");
                             const ask = function() {
@@ -1237,7 +1237,7 @@ function login(loginData, options, callback) {
                         console.log(e)
                         logger.Warning("Error, auto turn off Websocket_extension");
                         global.Fca.Require.FastConfig.Websocket_Extension.Status = false;
-                        global.Fca.Require.fs.writeFileSync(process.cwd() + "/PriyanshFca.json", JSON.stringify(global.Fca.Require.FastConfig, null, "\t"));
+                        global.Fca.Require.fs.writeFileSync(process.cwd() + "/MahabubFca.json", JSON.stringify(global.Fca.Require.FastConfig, null, "\t"));
                         process.exit(1);
                     }
                 }
